@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>공학수학2 중간고사 대비 — 섹션별 정리 & 모의고사</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<style>
+  :root{
+    --bg:#0f1220; --panel:#171a2b; --panel2:#1e2238; --line:#2a2f4a;
+    --text:#e7e9f3; --muted:#9aa0bd; --accent:#6c8cff; --accent2:#53d3b8;
+    --warn:#ffb020; --good:#39d98a; --bad:#ff6b6b;
+    --chip:#232744;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+    background:linear-gradient(180deg,#0d1020,#0f1220 300px);color:var(--text);
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent)}
+  header.top{
+    position:sticky;top:0;z-index:50;background:rgba(15,18,32,.85);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  }
+  .top-inner{max-width:1100px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .brand{font-weight:800;font-size:18px;letter-spacing:.3px}
+  .brand small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+  nav.tabs{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+  nav.tabs button{
+    background:var(--chip);color:var(--text);border:1px solid var(--line);
+    padding:8px 14px;border-radius:999px;cursor:pointer;font-size:14px;font-weight:600;
+    transition:.15s;
+  }
+  nav.tabs button:hover{border-color:var(--accent)}
+  nav.tabs button.active{background:var(--accent);border-color:var(--accent);color:#06102e}
+  main{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
+  .view{display:none;animation:fade .25s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .hero{background:linear-gradient(135deg,#1b2140,#161a2e);border:1px solid var(--line);border-radius:18px;padding:26px 24px;margin-bottom:22px}
+  .hero h1{margin:.1em 0 .3em;font-size:26px}
+  .hero p{margin:.2em 0;color:var(--muted)}
+  .pill-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .pill{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--text)}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .card h3{margin:.1em 0 .4em;font-size:16px}
+  .card .tag{font-size:12px;color:var(--accent2);font-weight:700;letter-spacing:.4px;text-transform:uppercase}
+  .card p{color:var(--muted);font-size:14px;margin:.3em 0}
+  .card .go{margin-top:10px;display:inline-block;font-size:13px;color:var(--accent);cursor:pointer;font-weight:700}
+
+  .section-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .section-nav button{background:var(--chip);border:1px solid var(--line);color:var(--muted);
+    padding:6px 11px;border-radius:8px;font-size:13px;cursor:pointer}
+  .section-nav button:hover{color:var(--text);border-color:var(--accent)}
+
+  .sec{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;overflow:hidden}
+  .sec>summary{cursor:pointer;list-style:none;padding:16px 18px;display:flex;align-items:center;gap:12px}
+  .sec>summary::-webkit-details-marker{display:none}
+  .sec>summary .code{background:var(--accent);color:#06102e;font-weight:800;border-radius:8px;padding:3px 9px;font-size:13px}
+  .sec>summary .title{font-weight:700;font-size:16px}
+  .sec>summary .chev{margin-left:auto;color:var(--muted);transition:.2s}
+  .sec[open]>summary .chev{transform:rotate(180deg)}
+  .sec .body{padding:0 18px 18px;border-top:1px solid var(--line)}
+  .sec .body h4{color:var(--accent2);margin:16px 0 6px;font-size:14px;letter-spacing:.3px;text-transform:uppercase}
+  .kbox{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:12px 14px;margin:8px 0}
+  .kbox .label{font-size:12px;color:var(--accent);font-weight:700;margin-bottom:2px}
+  ul.clean{margin:6px 0;padding-left:20px}
+  ul.clean li{margin:4px 0}
+
+  .prob{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:12px 0}
+  .prob .ph{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .prob .num{background:var(--chip);border:1px solid var(--line);border-radius:7px;padding:2px 9px;font-weight:800;font-size:13px;color:var(--accent2)}
+  .prob .src{font-size:12px;color:var(--muted);margin-left:auto}
+  .prob .q{margin:4px 0}
+  .prob .toggle{margin-top:8px;background:transparent;border:1px solid var(--line);color:var(--accent);
+    padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700}
+  .prob .sol{display:none;margin-top:10px;padding:12px 14px;background:#12152a;border:1px dashed var(--line);border-radius:10px}
+  .prob.open .sol{display:block}
+  .prob .sol .ans{color:var(--good);font-weight:700}
+
+  /* exam */
+  .exam-pick{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .exam-pick button{background:var(--chip);border:1px solid var(--line);color:var(--text);
+    padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:700}
+  .exam-pick button.active{background:var(--accent);color:#06102e;border-color:var(--accent)}
+  .exam-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--panel);
+    border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:16px;position:sticky;top:70px;z-index:20}
+  .timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:18px}
+  .btn{background:var(--accent);color:#06102e;border:none;padding:9px 16px;border-radius:9px;font-weight:800;cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn.good{background:var(--good);color:#04140b}
+  .eq{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .eq .ph{display:flex;gap:10px;align-items:baseline}
+  .eq .num{background:var(--chip);border:1px solid var(--line);border-radius:7px;padding:2px 9px;font-weight:800;color:var(--accent2);font-size:13px;flex:none}
+  .eq .pts{font-size:12px;color:var(--muted);margin-left:auto;flex:none}
+  .eq input.short{margin-top:10px;width:100%;background:#0e1122;border:1px solid var(--line);color:var(--text);
+    border-radius:8px;padding:9px 12px;font-size:15px}
+  .eq textarea{margin-top:10px;width:100%;min-height:90px;background:#0e1122;border:1px solid var(--line);color:var(--text);
+    border-radius:8px;padding:9px 12px;font-size:14px;resize:vertical}
+  .eq .sol{display:none;margin-top:12px;padding:12px 14px;background:#12152a;border:1px dashed var(--line);border-radius:10px}
+  .eq.reveal .sol{display:block}
+  .eq .ans{color:var(--good);font-weight:700}
+  .divider{display:flex;align-items:center;gap:10px;margin:22px 0 8px;color:var(--accent2);font-weight:800;letter-spacing:.5px}
+  .divider::before,.divider::after{content:"";height:1px;background:var(--line);flex:1}
+  .note{color:var(--muted);font-size:13px}
+  .scorebox{background:linear-gradient(135deg,#15321f,#13261a);border:1px solid #1f6b43;border-radius:12px;padding:14px 18px;margin:14px 0;display:none}
+  .scorebox.show{display:block}
+  footer{color:var(--muted);text-align:center;font-size:13px;padding:30px 0}
+  .tip{font-size:13px;color:var(--muted);margin-top:6px}
+  code.k{background:#0e1122;border:1px solid var(--line);padding:1px 6px;border-radius:6px;font-size:13px}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">공학수학2 중간고사 대비<small>벡터 · 벡터함수 · 다변수 미분 · 다중적분</small></div>
+    <nav class="tabs" id="tabs">
+      <button data-view="home" class="active">홈</button>
+      <button data-view="sections">섹션별 정리</button>
+      <button data-view="exams">모의고사</button>
+      <button data-view="guide">학습 가이드</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <section class="view active" id="view-home">
+    <div class="hero">
+      <h1>중간고사, 이 한 페이지로 끝내자 📘</h1>
+      <p>강의안(11.5–14.9), 조교 연습문제(Week 1–9), 퀴즈를 바탕으로 <b>섹션별 핵심 정리 + 예제 + 풀이</b>와 <b>모의고사 3회분</b>을 담았어요.</p>
+      <p class="note">문제는 각각 <b>클릭 한 번으로 풀이 토글</b>, 모의고사는 <b>타이머·자가채점</b>까지 됩니다.</p>
+      <div class="pill-row">
+        <span class="pill">📐 외적 · 평면 · 이차곡면</span>
+        <span class="pill">🧵 곡률 · 호길이 재매개변수화</span>
+        <span class="pill">🧮 편미분 · 연쇄법칙 · 방향도함수</span>
+        <span class="pill">⛰️ 극값 · 라그랑주 승수</span>
+        <span class="pill">∬ 이중·삼중적분 · 극/원기둥/구면</span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Step 1</div>
+        <h3>섹션별 정리로 개념 복습</h3>
+        <p>각 섹션의 핵심 공식과 포인트를 요약하고, 조교 연습문제를 예제로 풀이까지 붙였어요.</p>
+        <span class="go" data-goto="sections">섹션별 정리 보기 →</span>
+      </div>
+      <div class="card">
+        <div class="tag">Step 2</div>
+        <h3>모의고사 3회로 실전</h3>
+        <p>단답 10 + 서술형 3, 퀴즈·연습문제 스타일 그대로. 90분 타이머와 채점 제공.</p>
+        <span class="go" data-goto="exams">모의고사 풀기 →</span>
+      </div>
+      <div class="card">
+        <div class="tag">Tip</div>
+        <h3>출제 포인트 미리보기</h3>
+        <p>어떤 유형이 자주 나오는지, 실수 포인트는 무엇인지 가이드에서 확인하세요.</p>
+        <span class="go" data-goto="guide">학습 가이드 보기 →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTIONS -->
+  <section class="view" id="view-sections">
+    <h2>섹션별 핵심 정리 & 예제</h2>
+    <p class="note">제목을 클릭하면 펼쳐집니다. 각 문제의 <b>풀이 보기</b> 버튼으로 해설을 확인하세요.</p>
+    <div class="section-nav" id="secnav"></div>
+    <div id="sections-root"></div>
+  </section>
+
+  <!-- EXAMS -->
+  <section class="view" id="view-exams">
+    <h2>모의고사 (단답 10 · 서술형 3)</h2>
+    <div class="exam-pick" id="exampick"></div>
+    <div class="exam-bar">
+      <span>⏱</span><span class="timer" id="timer">90:00</span>
+      <button class="btn ghost" id="startBtn">타이머 시작</button>
+      <button class="btn ghost" id="resetBtn">리셋</button>
+      <button class="btn" id="gradeBtn">단답 채점하기</button>
+      <button class="btn good" id="revealBtn">전체 풀이 공개</button>
+    </div>
+    <div class="scorebox" id="scorebox"></div>
+    <div id="exam-root"></div>
+  </section>
+
+  <!-- GUIDE -->
+  <section class="view" id="view-guide">
+    <h2>학습 가이드 · 출제 포인트</h2>
+    <div id="guide-root"></div>
+  </section>
+</main>
+
+<footer>made for midterm prep · 수식은 MathJax로 렌더링됩니다 · 오프라인 시 수식은 LaTeX 원문으로 보일 수 있어요</footer>
+
+<script>
+window.MathJax = {
+  tex:{inlineMath:[['\\(','\\)'],['$','$']], displayMath:[['\\[','\\]'],['$$','$$']]},
+  svg:{fontCache:'global'}
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+  onerror="this.onerror=null;var s=document.createElement('script');s.id='MathJax-script';s.async=true;s.src='https://unpkg.com/mathjax@3/es5/tex-svg.js';document.head.appendChild(s);"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
